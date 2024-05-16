@@ -1,8 +1,8 @@
 -- Atividade 2 - Disciplina: SSC0960 - Programação Funcional
 
--- Nome: Eduardo Ribeiro Rodrigues            NUSP: 13696679
--- Nome: Matheus Bermudes Viana               NUSP: 11849797
--- Nome: Matheus Henrique de Cerqueira Pinto  NUSP: 11911104
+-- Nome: Eduardo Ribeiro Rodrigues  NUSP: 13696679
+-- Nome: Matheus Bermudes Viana     NUSP: 11849797
+-- Nome:
 
 -- Função principal
 main :: IO ()
@@ -45,6 +45,7 @@ primesInRange x y = takeWhile (<= y) $ dropWhile (< x) primes
 -- "drop" remove os primeiros n elementos de uma lista
 -- "maximum" retorna o maior elemento de uma lista
 maxPrimeGap :: [Int] -> Int
-maxPrimeGap primes = if length gaps > 0 then maximum gaps else 0
-  where
-    gaps = zipWith (-) (drop 1 primes) primes
+maxPrimeGap primes = aux (zipWith (-) (drop 1 primes) primes) 0
+    where
+        aux [] maxGap = maxGap
+        aux (x:xs) maxGap = aux xs (max maxGap x)
